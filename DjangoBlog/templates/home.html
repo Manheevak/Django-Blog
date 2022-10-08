@@ -1,0 +1,30 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff&family=Fira+Mono&family=Josefin+Sans:wght@100;400&family=Oswald:wght@500&family=Rubik+Distressed&display=swap" rel="stylesheet">
+<link rel="icon" href="https://i1.sndcdn.com/avatars-tXTVCU9ysCgns6KV-yaMJJg-t500x500.jpg" class='rounded-sm'>
+    {% tailwind_css %}
+</head>
+<body class="bg-backcol font-Fira">
+    <h1 class="text-texcol text-center my-12 text-xl font-Fira lg:text-3xl font-semibold">Manheevak Blog's</h1>
+    <div class="content">
+        {% if blog %}
+        {% for n in blog %}
+        <div class="space-y-1 mx-12 lg:mx-52 md:mx-52">
+        <p class="text-texcol text-md  mx-1 pt-8" >{{n.date}}</p>
+          <p class='text-main  text-2xl font-semibold  '>
+            <a href="{% url 'blogs' n.url %}" class="hover:underline px-1 py">{{n.title}}</a>
+        </p>
+    </div>
+    {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html> 

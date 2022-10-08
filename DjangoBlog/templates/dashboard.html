@@ -1,0 +1,63 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff&family=Fira+Mono&family=Josefin+Sans:wght@100;400&family=Oswald:wght@500&family=Rubik+Distressed&display=swap" rel="stylesheet">
+<link rel="icon" href="https://i1.sndcdn.com/avatars-tXTVCU9ysCgns6KV-yaMJJg-t500x500.jpg" class='rounded-sm'>
+    {% tailwind_css %}
+</head>
+<body class="bg-backcol font-Fira">
+    <div class="main text-texcol">
+        <h1 class="text-texcol font-Fira text-4xl text-center my-5">DashBoard</h1>
+        <p class="text-2xl mx-24  text-main font-semibold  cursor-pointer hover:underline hover:underline-offset-3;">Author - {{user}} </p>
+        {% if perms.DjangoApp.add_blog %}
+        <div class="main-text px-24 space-y-5 py-12 ">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                <script src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                <p>
+            {% if messages %}
+            {% for message in messages %}
+                <p class="text-main py-3 font-bold">{{message}}</p>           
+            {% endfor %}
+            {% endif %}
+        <label for="id_title" >Title:</label>
+        <input  class='text-black w-96' type="text" name="title" maxlength="450" required id="id_title" >
+      </p>
+      <p class="py-8">
+        <label for="id_url" >Url:</label>
+        <input class='text-black w-96 ' class="my-16" type="text" name="url" value="none" maxlength="300" required id="id_url"> 
+    </p>
+    <p>
+        <label for="id_content">Content:</label>
+        <div class="django-ckeditor-widget" data-field-id="id_content" style="display: inline-block; " >
+            <textarea  class=''name="content" cols="40" rows="10" required id="id_content" data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;Full&quot;, &quot;height&quot;: 291, &quot;width&quot;: 835, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_content" data-type="ckeditortype" class=""></textarea>
+    </div>
+      </p>
+                </div>
+            </p>
+        </div>
+        <button class="text-main mx-24 border-4 border-main">Submit</button>
+    </form>
+    </div>
+    {%else%}
+        <p class=" text-center my-12 text-2xl text-red-400">Permission Denied to Uplaod Blog !</p>
+        {%endif%}
+     {% if perms.Djangoapp.view_blog and perms.Djangoapp.change_blog%}
+             <h1 class="text-main text-3xl text-center">Blogs</h1>     
+             
+             {%else%}
+             <p class=" text-center my-12 text-2xl text-red-400 ">No Permission allowed</p>
+
+     {% endif %}
+        
+    </div>
+</body>
+</html>
